@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200&family=Source+Code+Pro&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voting Admin</title>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script src="/scripts/admin/main/admin-script.js"></script>
+    <link rel="icon" type="image/png" href="../assets/logo.png">
+    <link rel="stylesheet" href="../styles/admin/style.css">
+    <link rel="icon" type="image/png" href="assets/logo.png">
+</head>
+<body>
+    <!-- Replace the text link with a home icon -->
+    <a href="index.html" class="home-link">
+        <i class="fas fa-home"></i>
+    </a>
+
+    <div class="container">
+        <div style="text-align: center;">
+            <h1>Gathery Voting Admin</h1>
+            <hr style="width: 80%;">
+            <br>
+            <button onclick="window.location.href = 'add-part.html'" class="button" style="width: 250px;">Додати учасника</button>
+            <br>
+            <br>
+            <button onclick="window.location.href = 'add-user.html'" class="button" style="width: 250px;">Додати користувача</button>
+            <br>
+            <br>
+            <button onclick="window.location.href = 'manage.html'" class="button" style="width: 250px;">Керувати</button>
+            <br>
+            <br>
+            <button onclick="window.location.href = 'result.html'" class="button" style="width: 250px;">Result</button>
+            <br>
+            <br>
+            <button onclick="window.open('https://console.firebase.google.com/project/opijk-f14cd/database/opijk-f14cd-default-rtdb/data')" class="button" style="width: 250px;">Database</button>
+        
+        </div>
+    </div>
+</body>
+</html>

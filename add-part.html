@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200&family=Source+Code+Pro&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles/admin/style.css">
+    <!-- Include Font Awesome CSS (you can change the version if needed) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GV Admin</title>
+    <!-- Include Firebase JavaScript SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <!-- Include your app.js file -->
+    <script src="/scripts/admin/add-user/add-part.js"></script>
+    <link rel="icon" type="image/png" href="assets/logo.png">
+</head>
+<body>
+    <!-- Home icon with a link to the admin.html page -->
+    <a href="index.html" class="home-link">
+        <i class="fas fa-home"></i>
+    </a>
+
+    <div class="container">
+        <div style="text-align: center;">
+            <h1>Gathery Voting Admin</h1>
+            <hr style="width: 80%;">
+            <form class="fr">
+                <label for="wordInput" class="lbl">Додати учасника:</label>
+                <input type="text" id="login" placeholder="Login" required>
+                <input type="text" id="teacher" placeholder="Teacher" required>
+                <button onclick="addUser()" class="button">Додати</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+

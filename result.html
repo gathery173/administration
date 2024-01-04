@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200&family=Source+Code+Pro&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results</title>
+    <!-- Include Font Awesome CSS (you can change the version if needed) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" type="image/png" href="assets/logo.png">
+    <link rel="stylesheet" href="styles/admin/style.css">
+    <style>
+        body {
+        
+            position: relative;
+            background: #43517F;
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            
+        }
+
+        #contentContainer {
+            text-align: center;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+
+        .results-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .result-group {
+            width: 60%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .result-item {
+            background-color: #b8b8b8; /* Grey background for other participants */
+            padding: 10px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px; /* Add 10px bottom margin */
+            width: 100%; /* Make sure each card takes the full width */
+        }
+
+        .result-item .place {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .result-item .participant-name {
+            flex: 1;
+            text-align: left;
+            margin-right: 10px;
+        }
+
+        .result-item .votes {
+            font-size: 1.2em;
+        }
+
+        .result-item.golden {
+            background-color: #ffc532; /* Golden background for top 3 participants */
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="home-link">
+        <i class="fas fa-home"></i> 
+    </a>
+    <div class="container">
+        <div style="text-align: center;">
+            <h1>Gathery Voting Admin</h1>
+            <hr style="width: 80%;">
+            <br>
+            
+        </div>
+    </div>
+
+    <div id="contentContainer">
+        <div id="results" class="results-container">
+            <!-- Results will be displayed here dynamically -->
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+<script>
+    // Initialize Firebase
+    const firebaseConfig = {
+        apiKey: "AIzaSyBooRw8q86fnSegmIk9PC9ynkbp6ODyQoE",
+        authDomain: "opijk-f14cd.firebaseapp.com",
+        databaseURL: "https://opijk-f14cd-default-rtdb.firebaseio.com",
+        projectId: "opijk-f14cd",
+        storageBucket: "opijk-f14cd.appspot.com",
+        messagingSenderId: "970116476040",
+        appId: "1:970116476040:web:c9c81ac9b47b988028433d"
+    };
+    firebase.initializeApp(firebaseConfig);
+
+    function displayResults() {
+        const resultsContainer = document.getElementById('results');
+
+        firebase.database().ref('part').orderByChild('votes').once('value', snapshot => {
+            // Clear existing content
+            resultsContainer.innerHTML = '';
+
+            const participants = [];
+
+            snapshot.forEach(partSnapshot => {
+                const partName = partSnapshot.key;
+                const votesValue = partSnapshot.child('votes').val();
+
+                participants.push({ name: partName, votes: votesValue });
+            });
+
+            participants.sort((a, b) => b.votes - a.votes);
+
+            let displayedPlaces = 0;
+            let currentVotes = null;
+            let groupContainer = null;
+
+            participants.forEach((participant, index) => {
+                const place = index + 1;
+
+                if (participant.votes !== currentVotes) {
+                    // Start a new result group
+                    currentVotes = participant.votes;
+                    displayedPlaces++;
+
+                    groupContainer = document.createElement('div');
+                    groupContainer.className = 'result-group';
+                    resultsContainer.appendChild(groupContainer);
+                }
+
+                const resultItem = document.createElement('div');
+                resultItem.className = `result-item ${displayedPlaces <= 3 ? 'golden' : ''}`;
+                resultItem.innerHTML = `
+                    <div class="place">${displayedPlaces}</div>
+                    <div class="participant-name">${participant.name}</div>
+                    <div class="votes">${participant.votes}</div>
+                `;
+
+                groupContainer.appendChild(resultItem);
+            });
+        });
+    }
+
+    window.onload = displayResults;
+</script>
+
+</body>
+</html>

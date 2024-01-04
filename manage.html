@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200&family=Source+Code+Pro&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles/admin/style.css">
+    <!-- Include Font Awesome CSS (you can change the version if needed) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" type="image/png" href="assets/logo.png">
+    <style>
+        .progress-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .circle {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 2px solid #ffffff;
+            margin: 0 10px;
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
+            color: #43517F;
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="home-link">
+        <i class="fas fa-home"></i>
+    </a>
+
+    <div class="container">
+        <div style="text-align: center;">
+            <h1>Gathery Voting Admin</h1>
+            <hr style="width: 80%;">
+            <br>
+        </div>
+    </div>
+    <div class="cont" style="text-align: center;">
+        <form id="partForm">
+            <div id="radioContainer"></div>
+            <br>
+            <div>
+                <button type="button" onclick="updateNowValue()" class="button">Update</button>
+                <button onclick="stopVoting()" class="button">Stop</button>
+            </div>
+            <button type="button" onclick="updateProgress()" class="button" style="margin-top: 5px;">Update Progress</button>
+        </form>
+    
+        <!-- Progress Circles -->
+        <div class="progress-container">
+            <div class="circle" id="startCircle">S</div>
+            <div class="circle" id="finishCircle">F</div>
+            <div class="circle" id="resultCircle">R</div>
+        </div>
+    </div>
+    
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script src="/scripts/admin/main/admin-script.js"></script>
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyBooRw8q86fnSegmIk9PC9ynkbp6ODyQoE",
+            authDomain: "opijk-f14cd.firebaseapp.com",
+            databaseURL: "https://opijk-f14cd-default-rtdb.firebaseio.com",
+            projectId: "opijk-f14cd",
+            storageBucket: "opijk-f14cd.appspot.com",
+            messagingSenderId: "970116476040",
+            appId: "1:970116476040:web:c9c81ac9b47b988028433d"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+    </script>
+    
+    <script>
+        let clickCount = 0;
+
+        function updateProgress() {
+            clickCount++;
+
+            if (clickCount === 1) {
+                document.getElementById('startCircle').style.backgroundColor = '#43517F';
+                document.getElementById('startCircle').style.color = 'white';
+                firebase.database().ref('settings/start').set(true);
+            } else if (clickCount === 2) {
+                document.getElementById('finishCircle').style.backgroundColor = '#43517F';
+                document.getElementById('finishCircle').style.color = 'white';
+                firebase.database().ref('settings/end').set(true);
+            } else if (clickCount === 3) {
+                document.getElementById('resultCircle').style.backgroundColor = '#43517F';
+                document.getElementById('resultCircle').style.color = 'white';
+                firebase.database().ref('settings/result').set(true);
+            } else if (clickCount > 3) {
+                resetProgress();
+            }
+        }
+
+        function resetProgress() {
+            document.getElementById('startCircle').style.backgroundColor = 'white';
+            document.getElementById('startCircle').style.color = '#43517F';
+            document.getElementById('finishCircle').style.backgroundColor = 'white';
+            document.getElementById('finishCircle').style.color = '#43517F';
+            document.getElementById('resultCircle').style.backgroundColor = 'white';
+            document.getElementById('resultCircle').style.color = '#43517F';
+            clickCount = 0;
+
+            firebase.database().ref('settings/start').set(false);
+            firebase.database().ref('settings/end').set(false);
+            firebase.database().ref('settings/result').set(false);
+        }
+    </script>
+</body>
+</html>

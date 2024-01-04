@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200&family=Source+Code+Pro&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add User</title>
+    <!-- Include Firebase JavaScript SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <!-- Include your app.js file -->
+    <script src="/scripts/admin/main/admin-script.js"></script>
+    <link rel="icon" type="image/png" href="assets/logo.png">
+    <link rel="stylesheet" href="styles/admin/style.css">
+</head>
+<body>
+    <!-- Home icon with a link to the admin.html page -->
+    <a href="index.html" class="home-link">
+        <i class="fas fa-home"></i>
+    </a>
+
+    <div class="container">
+        <div style="text-align: center;">
+            <h1>Gathery Voting Admin</h1>
+            <hr style="width: 80%;">
+            <form class="fr">
+                <label for="wordInput" class="lbl">Додати користувача:</label>
+                <input type="text" id="login" placeholder="Login" required>
+                <input type="text" id="pwd" placeholder="Password">
+                <select id="tch">
+                    <option value="" disabled selected>Виберіть клас</option>
+                    <option value="5А">5А</option>
+                    <option value="5Б">5Б</option>
+                    <option value="5В">5В</option>
+                    <option value="5Г">5Г</option>
+                    <option value="5А">6А</option>
+                    <option value="5Б">6Б</option>
+                    <option value="5В">6В</option>
+                    <option value="5Г">6Г</option>
+                    <option value="5А">7А</option>
+                    <option value="5Б">7Б</option>
+                    <option value="5В">7В</option>
+                    <option value="5Г">7Г</option>
+                    <option value="5А">8А</option>
+                    <option value="5Б">8Б</option>
+                    <option value="5В">8В</option>
+                    <option value="5А">9А</option>
+                    <option value="5Б">9Б</option>
+                    <option value="5В">9В</option>
+                    <option value="5А">10А</option>
+                    <option value="5Б">10Б</option>
+                    <option value="5В">10В</option>
+                    <option value="5А">11А</option>
+                    <option value="5Б">11Б</option>
+                    <!-- Add more options as needed -->
+                </select><div style="display: flex;">
+                    <button type="button" onclick="generateNewPassword()" style="width:fit-content; margin-right: 10px;">
+                        <i class="fas fa-key"></i> <!-- Font Awesome password icon -->
+                    </button>
+                    <button type="button" onclick="addUser()" class="button">Додати</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function generateRandomPassword() {
+            // Generate a random password (8 characters)
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            let password = '';
+            for (let i = 0; i < 8; i++) {
+                const randomIndex = Math.floor(Math.random() * characters.length);
+                password += characters.charAt(randomIndex);
+            }
+            return password;
+        }
+
+
+        function generateNewPassword() {
+            const passwordInput = document.getElementById('pwd');
+
+            // Generate a new random password and update the field
+            passwordInput.value = generateRandomPassword();
+        }
+        function capitalizeUkrainian(input) {
+            input.value = input.value.replace(/[^А-Яа-яІіЇїЄєҐґ']/g, ''); // Remove non-Ukrainian characters
+            input.value = input.value.replace(/\b\w/g, (l) => l.toUpperCase()); // Capitalize first letter of each word
+        }
+
+
+    </script>
+</body>
+</html>
