@@ -15,7 +15,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
     <!-- Include your app.js file -->
-    <script src="scripts/admin/main/admin-script.js"></script>
+    <script src="/scripts/admin/main/admin-script.js"></script>
     <link rel="icon" type="image/png" href="assets/logo.png">
     <link rel="stylesheet" href="styles/admin/style.css">
 </head>
@@ -59,7 +59,11 @@
                     <option value="5А">11А</option>
                     <option value="5Б">11Б</option>
                     <!-- Add more options as needed -->
-                </select><div style="display: flex;">
+                </select>
+                <input type="email" id="mail" placeholder="Mail">
+                <div style="display: flex;">
+                
+                
                     <button type="button" onclick="generateNewPassword()" style="width:fit-content; margin-right: 10px;">
                         <i class="fas fa-key"></i> <!-- Font Awesome password icon -->
                     </button>
