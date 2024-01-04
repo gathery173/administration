@@ -20,12 +20,14 @@ const database = firebase.database();
 function addUser() {
   const log = document.getElementById('login');
   const pwd = document.getElementById('pwd');
+  const ml = document.getElementById('mail');
   
   const teach = document.getElementById('tch');
   const login = log.value.trim();
   const pas = pwd.value.trim();
   
   const tch = teach.value.trim();
+  const mail = ml.value.trim();
 
 
   // Check if the user already exists
@@ -41,7 +43,7 @@ function addUser() {
                   userRef.update({
                     login: login,
                       pwd: pas,
-                    
+                      mail: mail,
                       teacher: tch,
                   });
 
@@ -52,7 +54,7 @@ function addUser() {
               userRef.set({
                   login: login,
                   pwd: pas,
-                
+                  mail: mail,
                   teacher: tch,
 
               });
@@ -65,6 +67,7 @@ function addUser() {
           pwd.value = '';
         
           teach.value = '';
+          ml.value = ''
       })
       .catch(error => {
           console.error('Error checking user existence:', error);
